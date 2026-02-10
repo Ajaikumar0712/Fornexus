@@ -1,0 +1,11 @@
+# Robots.txt for FORNEXUS
+# https://fornexus.tech
+
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://fornexus.tech/sitemap.xml
+
+# Crawl delay (optional, be nice to servers)
+Crawl-delay: 1
