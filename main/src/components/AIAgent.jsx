@@ -1,6 +1,42 @@
 import { useState, useRef, useEffect } from 'react';
 
 function AIAgent() {
+    // Fallback response function for common questions
+    const generateFallbackResponse = (question) => {
+        const responses = {
+            'price': 'Our pricing starts at ₹9,999/month for the Basic plan (1 AI Agent + setup ₹14,999). Business plan is ₹34,999/month (up to 3 agents + setup ₹29,999). Enterprise plans start from ₹1,00,000/month. Would you like details about any specific plan?',
+            
+            'service': 'We offer 4 main AI solutions:\n\n1. 🤖 Customer Support Agents (24/7 automated support)\n2. 📊 Data Analysis Agents (insights & predictive analytics)\n3. ⚡ Workflow Automation Agents (automate repetitive tasks)\n4. 🌐 AI Powered Smart Websites\n\nWhich service interests you most?',
+            
+            'demo': 'I\'d love to show you a demo! You can:\n\n📱 WhatsApp us at +91-6380596859 for instant demo\n📧 Email fornexus94@gmail.com\n🔗 Follow @for.nexus on Instagram\n\nOur team typically responds within minutes. What type of AI solution demo would you like to see?',
+            
+            'contact': 'You can reach us through:\n\n📱 WhatsApp: +91-6380596859 (fastest response)\n📧 Email: fornexus94@gmail.com\n📸 Instagram: @for.nexus\n💼 LinkedIn: /company/fornexus\n\nWe\'re available Mon-Sat, 9AM-8PM IST. How can we help you today?',
+            
+            'process': 'Our AI development process has 3 steps:\n\n1. 🔍 Discovery & Strategy - We analyze your needs and create a roadmap\n2. 🛠️ Development & Training - Our experts build and train your AI agent\n3. 🚀 Integration & Launch - We integrate into your systems and go live\n\nTypically takes 2-4 weeks. What kind of AI solution are you considering?',
+            
+            'custom': 'Absolutely! We specialize in custom AI solutions. Our Enterprise plan includes:\n\n✅ Unlimited custom AI agents\n✅ Bespoke workflow development\n✅ Deep system integration\n✅ Priority 24/7 support\n\nLet\'s discuss your specific needs on WhatsApp: +91-6380596859',
+            
+            'default': 'Thanks for your question! I\'m here to help with information about FORNEXUS AI solutions.\n\nFor detailed answers and personalized assistance, please reach out:\n\n📱 WhatsApp: +91-6380596859\n📧 Email: fornexus94@gmail.com\n\nOur team will get back to you within minutes!'
+        };
+
+        // Match question with appropriate response
+        if (question.includes('price') || question.includes('cost') || question.includes('pricing')) {
+            return responses.price;
+        } else if (question.includes('service') || question.includes('what do you') || question.includes('what can you')) {
+            return responses.service;
+        } else if (question.includes('demo') || question.includes('show me') || question.includes('example')) {
+            return responses.demo;
+        } else if (question.includes('contact') || question.includes('reach') || question.includes('call') || question.includes('email')) {
+            return responses.contact;
+        } else if (question.includes('how') && (question.includes('work') || question.includes('process'))) {
+            return responses.process;
+        } else if (question.includes('custom') || question.includes('specific') || question.includes('unique')) {
+            return responses.custom;
+        } else {
+            return responses.default;
+        }
+    };
+
     const [isOpen, setIsOpen] = useState(false);
     const [messages, setMessages] = useState([
         {
@@ -32,75 +68,18 @@ function AIAgent() {
         setIsLoading(true);
 
         try {
-            const systemPrompt = `You are a helpful AI assistant for FORNEXUS, an AI agency that builds intelligent autonomous agents. 
-
-Our services include:
-- Customer Support Agents (24/7 automated support)
-- Data Analysis Agents (insights and predictive analytics)
-- Workflow Automation Agents (automate repetitive tasks)
-- AI Powered Smart Websites
-
-Our pricing:
-- Basic Plan: $100/mo (1 AI Agent, Basic Integration, Email Support)
-- Business Plan: $500/mo (Up to 3 AI Agents, Advanced Integrations, Lead Generation & RAG, Dedicated Account Manager)
-- Custom Plan: Custom pricing (Unlimited Agents, Bespoke Development, Deep Integration, Priority 24/7 Support)
-
-Be friendly, professional, and helpful. Keep responses concise and engaging. If asked about services not listed, politely explain what we do offer.`;
-
-            const payload = {
-                contents: [
-                    {
-                        role: 'user',
-                        parts: [{ text: systemPrompt + '\n\nUser question: ' + userMessage }]
-                    }
-                ],
-                generationConfig: {
-                    temperature: 0.7,
-                    topK: 40,
-                    topP: 0.95,
-                    maxOutputTokens: 1024,
-                }
-            };
-
-            const apiKey = 'AIzaSyCb4xWNLCQl2Qjsadh0nw0HXdOn-9_CsXU';
-            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent?key=${apiKey}`;
-
-            const response = await fetch(apiUrl, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(payload)
-            });
-
-            const result = await response.json();
-
-            if (!response.ok) {
-                console.error('API Error:', result);
-                throw new Error(result.error?.message || 'Failed to get response from AI');
-            }
-
-            if (result.candidates && result.candidates[0]?.content?.parts?.[0]?.text) {
-                const aiResponse = result.candidates[0].content.parts[0].text;
-                setMessages(prev => [...prev, { role: 'assistant', content: aiResponse }]);
-            } else {
-                console.error('Unexpected response format:', result);
-                throw new Error('Unexpected response format from AI');
-            }
+            // For security, API calls should go through your backend
+            // This is a fallback response for common questions
+            await new Promise(resolve => setTimeout(resolve, 1000)); // Simulate API delay
+            
+            let aiResponse = generateFallbackResponse(userMessage.toLowerCase());
+            setMessages(prev => [...prev, { role: 'assistant', content: aiResponse }]);
 
         } catch (error) {
             console.error('Error:', error);
-            let errorMessage = 'I apologize, but I\'m having trouble connecting right now. ';
-
-            if (error.message.includes('API key')) {
-                errorMessage += 'There seems to be an issue with the API configuration. ';
-            } else if (error.message.includes('quota')) {
-                errorMessage += 'We\'ve reached our usage limit for now. ';
-            }
-
-            errorMessage += 'Please try contacting us directly using the contact form below, or reach out via WhatsApp.';
-
             setMessages(prev => [...prev, {
                 role: 'assistant',
-                content: errorMessage
+                content: 'I\'m having trouble processing that right now. For immediate assistance, please contact us directly:\n\n📱 WhatsApp: +91-6380596859\n📧 Email: fornexus94@gmail.com\n\nWe typically respond within minutes!'
             }]);
         } finally {
             setIsLoading(false);
@@ -110,8 +89,8 @@ Be friendly, professional, and helpful. Keep responses concise and engaging. If 
     const quickQuestions = [
         'What services do you offer?',
         'How much does it cost?',
-        'How does the process work?',
-        'Can you help with custom solutions?'
+        'Can I see a demo?',
+        'How do I contact you?'
     ];
 
     const handleQuickQuestion = (question) => {
