@@ -20,7 +20,9 @@ function Pricing() {
                         <p className="text-4xl font-black mb-2">
                             ₹9,999<span className="text-lg font-medium text-gray-400">/mo</span>
                         </p>
-                        <p className="text-sm text-indigo-400 mb-6">One-time setup: ₹7,999</p>
+                        <p className="text-xl text-gray-300 mb-2">$120<span className="text-sm text-gray-400">/mo</span></p>
+                        <p className="text-sm text-indigo-400 mb-2">One-time setup: ₹7,999</p>
+                        <p className="text-xs text-gray-400 mb-4">One-time setup: $95</p>
                         <ul className="space-y-3 text-gray-300 mb-6 flex-grow">
                             <li className="flex items-start">
                                 <span className="text-indigo-400 mr-3">✓</span>1 AI Agent (Support or Automation)
@@ -64,7 +66,9 @@ function Pricing() {
                         <p className="text-4xl font-black mb-2">
                             ₹20,999<span className="text-lg font-medium text-gray-400">/mo</span>
                         </p>
-                        <p className="text-sm text-indigo-400 mb-6">One-time setup: ₹9,999</p>
+                        <p className="text-xl text-gray-300 mb-2">$250<span className="text-sm text-gray-400">/mo</span></p>
+                        <p className="text-sm text-indigo-400 mb-2">One-time setup: ₹9,999</p>
+                        <p className="text-xs text-gray-400 mb-4">One-time setup: $120</p>
                         <ul className="space-y-3 text-gray-300 mb-6 flex-grow">
                             <li className="flex items-start">
                                 <span className="text-indigo-400 mr-3">✓</span>Up to 3 AI Agents
@@ -107,7 +111,8 @@ function Pricing() {
                         </div>
                         <p className="text-gray-400 mb-4">For Large Teams & Complex Workflows</p>
                         <p className="text-4xl font-black mb-2">Custom</p>
-                        <p className="text-sm text-indigo-400 mb-6">Starting from ₹50,000/mo</p>
+                        <p className="text-sm text-indigo-400 mb-2">Starting from ₹50,000/mo</p>
+                        <p className="text-xs text-gray-400 mb-4">Starting from $600/mo</p>
                         <ul className="space-y-3 text-gray-300 mb-6 flex-grow">
                             <li className="flex items-start">
                                 <span className="text-indigo-400 mr-3">✓</span>Unlimited Custom AI Agents
@@ -147,14 +152,17 @@ function Pricing() {
                         <div className="card p-4 rounded-xl text-center">
                             <p className="font-semibold mb-1">Extra AI Agent</p>
                             <p className="text-indigo-400 font-bold">₹4,499/mo</p>
+                            <p className="text-xs text-gray-400">$54/mo</p>
                         </div>
                         <div className="card p-4 rounded-xl text-center">
                             <p className="font-semibold mb-1">WhatsApp Integration</p>
                             <p className="text-indigo-400 font-bold">₹5,999/mo</p>
+                            <p className="text-xs text-gray-400">$72/mo</p>
                         </div>
                         <div className="card p-4 rounded-xl text-center">
                             <p className="font-semibold mb-1">Lead Database Setup</p>
                             <p className="text-indigo-400 font-bold">₹5,000 <span className="text-xs text-gray-400">one-time</span></p>
+                            <p className="text-xs text-gray-400">$60 one-time</p>
                         </div>
                         <div className="card p-4 rounded-xl text-center">
                             <p className="font-semibold mb-1">Website </p>
